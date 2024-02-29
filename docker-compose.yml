@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  web:
+    container_name: web-php-prueba
+    image: php:7.2-apache
+    restart: always
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src/:/var/www/html/
+  db:
+    image: mariadb:10.6
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test 
